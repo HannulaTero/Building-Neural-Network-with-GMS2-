@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Functions",
-    "path": "folders/Neural Network/Functions.yy",
+    "name": "Neural Network",
+    "path": "folders/Neural Network.yy",
   },
   "resourceVersion": "1.0",
-  "name": "neural_activation",
+  "name": "neural_common",
   "tags": [],
   "resourceType": "GMScript",
 }

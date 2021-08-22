@@ -6,8 +6,13 @@ function neural_network() constructor {
 	size	= 0;			// {int}	(for easy-to-access) How many layers network has
 	first	= undefined;	// {layer}	(for easy-to-access) First layer of layers-array.
 	last	= undefined;	// {layer}	(for easy-to-access) Last layer of layers-array.
+	taped	= false;		// {bool}	Does the network have gradients-structure.
 	add		= new neural_builder(self); // For creating new layers for neural network.
 	
+	///________________________________________________________________________________________________________________
+	///
+	/// FORWARD -PASS
+	///________________________________________________________________________________________________________________
 	/// @func	Input(input);
 	/// @desc	Updates neurons' activity of first layer
 	/// @param	{any}	input	Depends from input-layer what information needs to fed. Currently just an array.
@@ -31,6 +36,10 @@ function neural_network() constructor {
 		return last.output;
 	}
 	
+	///________________________________________________________________________________________________________________
+	///
+	/// GENERAL FUNCTIONS
+	///________________________________________________________________________________________________________________
 	/// @func	Destroy();
 	/// @desc	Destroys all layers of the network.
 	static Destroy = function() {
@@ -39,16 +48,18 @@ function neural_network() constructor {
 		}
 	}
 	
-	/// @func	Draw(x, y, scale);
+	/// @func	Draw(x, y, scale, xspacing, yspacing);
 	/// @desc	Visualizes network by drawing the layers. Makes x-origin at the middle of network.
 	/// @param	{real}	x
 	/// @param	{real}	y
 	/// @param	{real}	scale
-	static Draw = function(xx, yy, scale) {
-		xx -= scale * size / 2;
+	/// @param	{real}	xspacing	
+	/// @param	{real}	yspacing	
+	static Draw = function(xx, yy, scale, xspacing, yspacing) {
+		xx -= xspacing * size / 2;
 		for(var i = 0; i < size; i++) {
-			layers[i].Draw(xx, yy, scale);
-			xx += scale;
+			layers[i].Draw(xx, yy, scale, xspacing, yspacing);
+			xx += xspacing;
 		}
 	}
 }

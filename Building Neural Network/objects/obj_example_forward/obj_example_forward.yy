@@ -31,7 +31,7 @@
     "path": "folders/Example.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_example",
+  "name": "obj_example_forward",
   "tags": [],
   "resourceType": "GMObject",
 }

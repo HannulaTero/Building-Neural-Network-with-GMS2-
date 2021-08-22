@@ -6,10 +6,12 @@
 /// @param	{enum}	activation	Enum identifier for activation function.
 function neural_layer_dense(_input, _size, _activation) : neural_layer_base(_size) constructor {
 	static type = LayerType.DENSE;
-	input = _input;				// {layer}		Previous layer where layer is connected to
-	activation = _activation;	// {enum}		Stores enum identifier for activation function, for global activation function array.
+	static learnable = true;	// {bool}	Layer has learnable parameters.
+	input = _input;				// {layer}	Previous layer where layer is connected to
+	activation = _activation;	// {enum}	Stores enum identifier for activation function, for global activation function array.
 	
 	// Create structures for dense-layer parameters
+	activity = array_create(size, 0);	// {array}		Non-linearized neuron activity (before fed to activation function).
 	bias = array_create(size, 0);		// {array}		Neuron bias for activity
 	weights = array_create(size);		// {array2D}	Neurons connections to input
 	
@@ -32,9 +34,43 @@ function neural_layer_dense(_input, _size, _activation) : neural_layer_base(_siz
 			for(var j = 0; j < input.size; j++) {
 				weightedSum += input.output[j] * weights[i][j];
 			}
+			// Store neuron activity before non-linearizing it with activation function
+			activity[@i] = weightedSum;
+			
 			// Neuron activity: weighted sum of previous layer added with bias. This is fed to activation function.
 			output[@i] = Activation( weightedSum + bias[i] );
 		}
+	}
+	
+	/// @func	Draw(x, y, scale, xspacing, yspacing);
+	/// @desc	Visualizes layers neuron activities and weights.
+	/// @param	{real}	x
+	/// @param	{real}	y
+	/// @param	{real}	scale
+	/// @param	{real}	xspacing
+	/// @param	{real}	yspacing
+	static BaseDraw = Draw;
+	static Draw = function(xx, yy, scale, xspacing, yspacing) {
+		// Draw weights
+		var ww = sprite_get_width(spr_neuron);
+		var xi = xx - ww*scale/2; 
+		var xj = xx + ww*scale/2 - xspacing;
+		var yi = yy - yspacing * size/2;
+		var yj = yy;
+		for(var i = 0; i < size; i++) {
+			yj = yy - yspacing * input.size/2;
+			for(var j = 0; j < input.size; j++) {
+				var value = weights[i][j];
+				var color = neuron_color(value);
+				var width = min(2, value*8);
+				draw_line_width_color(xi, yi, xj, yj, width, color, color);
+				yj += yspacing;
+			}
+			yi += yspacing;
+		}
+		
+		// Draw neuron activities
+		BaseDraw(xx, yy, scale, xspacing, yspacing);
 	}
 }
 

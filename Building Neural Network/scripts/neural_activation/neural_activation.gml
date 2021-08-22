@@ -4,7 +4,9 @@
 	
 	Define all available acitvation function here for neural network.
 	All activation function are stored in global array, and accessed by index / enum identifier.
-
+	All activation function derivatives are stored in array.
+	Derivative are accessed by same index as activation function.
+	
 ________________________________________________________________________________________________________________
 */
 
@@ -17,13 +19,14 @@ enum ActFunc {
 }
 
 #macro	ACTIVATION_FUNC	global.gACTIVATION_FUNCTION_ARRAY
+#macro	DERIVATIVE_FUNC global.gDERIVATIVE_FUNCTION_ARRAY
 
 // Available activation functions stored in global array.
-ACTIVATION_FUNC = [];
-ACTIVATION_FUNC[ActFunc.IDENTITY]	= Identity;
-ACTIVATION_FUNC[ActFunc.TANH]		= Tanh;
-ACTIVATION_FUNC[ActFunc.SIGMOID]	= Sigmoid;
-ACTIVATION_FUNC[ActFunc.RELU]		= Relu;
+ACTIVATION_FUNC = [];								DERIVATIVE_FUNC = [];
+ACTIVATION_FUNC[ActFunc.IDENTITY]	= Identity;		DERIVATIVE_FUNC[ActFunc.IDENTITY]	= IdentityDerivative;
+ACTIVATION_FUNC[ActFunc.TANH]		= Tanh;			DERIVATIVE_FUNC[ActFunc.TANH]		= TanhDerivative;
+ACTIVATION_FUNC[ActFunc.SIGMOID]	= Sigmoid;		DERIVATIVE_FUNC[ActFunc.SIGMOID]	= SigmoidDerivative;
+ACTIVATION_FUNC[ActFunc.RELU]		= Relu;			DERIVATIVE_FUNC[ActFunc.RELU]		= ReluDerivative;
 
 
 //________________________________________________________________________________________________________________
@@ -36,6 +39,12 @@ ACTIVATION_FUNC[ActFunc.RELU]		= Relu;
 function Identity(input) {
 	return input;
 }
+/// @func	IdentityDerivative(input);
+/// @desc	Derivative of Identity-function
+/// @param	{real}	input
+function IdentityDerivative(input) {
+	return 1;	// Simple as that.
+}
 
 //________________________________________________________________________________________________________________
 //
@@ -46,6 +55,12 @@ function Identity(input) {
 /// @param	{real}	input
 function Tanh(input) {
 	return ((2 / (1 + exp(-2 * input))) - 1);
+}
+/// @func	TanhDerivative(input);
+/// @desc	Derivative of Tanh-function
+/// @param	{real}	input
+function TanhDerivative(input) {
+	return (1 - sqr(Tanh(input)));
 }
 
 //________________________________________________________________________________________________________________
@@ -58,6 +73,13 @@ function Tanh(input) {
 function Sigmoid(input) {
 	return (1 / (1 + exp(-input)));
 }
+/// @func	SigmoidDerivative(input);
+/// @desc	Derivative of Sigmoid-function
+/// @param	{real}	input
+function SigmoidDerivative(input) {
+	input = Sigmoid(input);	// To call Sigmoid only once.
+	return (input * (1 - input));
+}
 
 //________________________________________________________________________________________________________________
 //
@@ -69,6 +91,19 @@ function Sigmoid(input) {
 function Relu(input) {
 	return max(0, input);
 }
+/// @func	ReluDerivative(input);
+/// @desc	Derivative of Relu-function
+/// @param	{real}	input
+function ReluDerivative(input) {
+	return (input > 0);
+}
+
+
+
+
+
+
+
 
 
 
