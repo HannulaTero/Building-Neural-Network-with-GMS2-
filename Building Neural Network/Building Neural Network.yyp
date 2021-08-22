@@ -1,0 +1,53 @@
+{
+  "resources": [
+    {"id":{"name":"neural_network","path":"scripts/neural_network/neural_network.yy",},"order":0,},
+    {"id":{"name":"neural_activation","path":"scripts/neural_activation/neural_activation.yy",},"order":2,},
+    {"id":{"name":"neural_builder","path":"scripts/neural_builder/neural_builder.yy",},"order":1,},
+    {"id":{"name":"neural_layer_dense","path":"scripts/neural_layer_dense/neural_layer_dense.yy",},"order":2,},
+    {"id":{"name":"neural_layer_input","path":"scripts/neural_layer_input/neural_layer_input.yy",},"order":1,},
+    {"id":{"name":"obj_example","path":"objects/obj_example/obj_example.yy",},"order":0,},
+    {"id":{"name":"room_example","path":"rooms/room_example/room_example.yy",},"order":1,},
+    {"id":{"name":"neural_layer_base","path":"scripts/neural_layer_base/neural_layer_base.yy",},"order":0,},
+  ],
+  "Options": [
+    {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
+    {"name":"Android","path":"options/android/options_android.yy",},
+    {"name":"HTML5","path":"options/html5/options_html5.yy",},
+    {"name":"iOS","path":"options/ios/options_ios.yy",},
+    {"name":"Linux","path":"options/linux/options_linux.yy",},
+    {"name":"macOS","path":"options/mac/options_mac.yy",},
+    {"name":"Main","path":"options/main/options_main.yy",},
+    {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+    {"name":"Windows UWP","path":"options/windowsuap/options_windowsuap.yy",},
+  ],
+  "isDnDProject": false,
+  "isEcma": false,
+  "tutorialPath": "",
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrderNodes": [
+    {"roomId":{"name":"room_example","path":"rooms/room_example/room_example.yy",},},
+  ],
+  "Folders": [
+    {"folderPath":"folders/Neural Network/Layers.yy","order":3,"resourceVersion":"1.0","name":"Layers","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Neural Network.yy","order":0,"resourceVersion":"1.0","name":"Neural Network","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Example.yy","order":1,"resourceVersion":"1.0","name":"Example","tags":[],"resourceType":"GMFolder",},
+  ],
+  "AudioGroups": [
+    {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+  ],
+  "TextureGroups": [
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
+  ],
+  "IncludedFiles": [],
+  "MetaData": {
+    "IDEVersion": "2.3.3.574",
+  },
+  "resourceVersion": "1.4",
+  "name": "Building Neural Network",
+  "tags": [],
+  "resourceType": "GMProject",
+}
