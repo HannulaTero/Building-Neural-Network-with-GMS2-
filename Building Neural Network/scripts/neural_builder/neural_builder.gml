@@ -23,7 +23,7 @@ function neural_builder(_target) constructor {
 			throw("Cannot add another Input-layer");
 		}
 		nn.first = (gradients)
-			? ADD(new neural_tape_input(_size))
+			? ADD(new neural_taped_input(_size))
 			: ADD(new neural_layer_input(_size));
 		return nn.first; 
 	}
@@ -34,7 +34,7 @@ function neural_builder(_target) constructor {
 	/// @param	{enum}	activation	Enum-identifier for activation function, index for global array.
 	static Dense = function(_size, _activation) {
 		return (gradients)
-			? ADD(new neural_tape_dense(nn.last, _size, _activation)) 
+			? ADD(new neural_taped_dense(nn.last, _size, _activation)) 
 			: ADD(new neural_layer_dense(nn.last, _size, _activation)); 
 	}
 }

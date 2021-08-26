@@ -13,8 +13,8 @@
     {"id":{"name":"obj_example_forward","path":"objects/obj_example_forward/obj_example_forward.yy",},"order":0,},
     {"id":{"name":"room_example","path":"rooms/room_example/room_example.yy",},"order":2,},
     {"id":{"name":"neural_gradients","path":"scripts/neural_gradients/neural_gradients.yy",},"order":2,},
-    {"id":{"name":"neural_tape_input","path":"scripts/neural_tape_input/neural_tape_input.yy",},"order":0,},
-    {"id":{"name":"neural_tape_dense","path":"scripts/neural_tape_dense/neural_tape_dense.yy",},"order":1,},
+    {"id":{"name":"neural_taped_input","path":"scripts/neural_taped_input/neural_taped_input.yy",},"order":0,},
+    {"id":{"name":"neural_taped_dense","path":"scripts/neural_taped_dense/neural_taped_dense.yy",},"order":1,},
     {"id":{"name":"neural_layer_base","path":"scripts/neural_layer_base/neural_layer_base.yy",},"order":0,},
   ],
   "Options": [

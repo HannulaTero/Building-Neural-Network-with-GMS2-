@@ -14,3 +14,11 @@ function neuron_color(input) {
 	var B = 32;
 	return make_color_rgb(R, G, B);
 }
+
+/// @func	approximate_derivative(func, input);
+/// @desc	Returns approximate derivative for function
+/// @param	{function}	func
+/// @param	{real}		input
+function approximate_derivative(func, input) {
+	return (func(input-.00001) - func(input+.00001)) / .00002;
+}

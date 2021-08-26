@@ -6,7 +6,7 @@
     "path": "folders/Neural Network/Gradients.yy",
   },
   "resourceVersion": "1.0",
-  "name": "neural_tape_dense",
+  "name": "neural_taped_input",
   "tags": [],
   "resourceType": "GMScript",
 }

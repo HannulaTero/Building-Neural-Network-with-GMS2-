@@ -1,11 +1,11 @@
 
 
-/// @func	neural_tape_dense(input, size, activation);
+/// @func	neural_taped_dense(input, size, activation);
 /// @desc	Creates dense-layer with gradients-structure.
 /// @param	{layer}	input		Neural network layer
 /// @param	{int}	size		Count of neurons
 /// @param	{enum}	activation	Enum identifier for activation function.
-function neural_tape_dense(_input, _size, _activation) : neural_layer_dense(_input, _size, _activation) constructor {
+function neural_taped_dense(_input, _size, _activation) : neural_layer_dense(_input, _size, _activation) constructor {
 	// Create gradients-structure
 	session = 0;						// {int}		How many passes has been made, for calculating averages
 	delta = array_create(size, 0);		// {array}		Neuron's part for total error
