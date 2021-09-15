@@ -11,6 +11,7 @@ enum LayerType {
 function neural_layer_base(_size){
 	static type = LayerType.BASE;		// {enum}	Which kind of layer.
 	static learnable = false;			// {bool}	Tells if layer has learnable parameters. 
+	static taped = false;				// {bool}	Tells if layer has gradients-structure.
 	size = _size;						// {int}	Neuron count, size of layer
 	input = undefined;					// {layer}	Reference to another neural layer
 	output = array_create(size, 0);		// {array}	Neuron activities. Implicit neurons.

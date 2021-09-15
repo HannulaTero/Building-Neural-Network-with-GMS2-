@@ -3,8 +3,7 @@
 /// @desc	Helper struct for adding new layers to neural network, so we don't them to be in main constructor.
 /// @param	{neural_network}	target
 function neural_builder(_target) constructor {
-	nn = _target;		// {struct}	Target neural network.
-	gradients = false;	// {bool}	Will network use gradients-structure
+	nn = _target; // {struct}	Target neural network.
 	
 	/// @func	ADD(layer);
 	/// @desc	Helper function for adding layers to target neural network.
@@ -22,7 +21,7 @@ function neural_builder(_target) constructor {
 		if (!is_undefined(nn.first)) {
 			throw("Cannot add another Input-layer");
 		}
-		nn.first = (gradients)
+		nn.first = (nn.taped)
 			? ADD(new neural_taped_input(_size))
 			: ADD(new neural_layer_input(_size));
 		return nn.first; 
@@ -33,7 +32,7 @@ function neural_builder(_target) constructor {
 	/// @param	{int}	size		How many neurons layer will have. Size of layer.
 	/// @param	{enum}	activation	Enum-identifier for activation function, index for global array.
 	static Dense = function(_size, _activation) {
-		return (gradients)
+		return (nn.taped)
 			? ADD(new neural_taped_dense(nn.last, _size, _activation)) 
 			: ADD(new neural_layer_dense(nn.last, _size, _activation)); 
 	}

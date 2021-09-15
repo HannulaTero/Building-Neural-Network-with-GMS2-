@@ -2,11 +2,11 @@
 /// @func	neural_network();
 /// @desc	Creates base structure for neural network. Layers are added with builder.
 function neural_network() constructor {
+	static taped = false;	// {bool}	Does the network have gradients-structure.
 	layers	= [];			// {array}	Holds all layers of neural network
 	size	= 0;			// {int}	(for easy-to-access) How many layers network has
 	first	= undefined;	// {layer}	(for easy-to-access) First layer of layers-array.
 	last	= undefined;	// {layer}	(for easy-to-access) Last layer of layers-array.
-	taped	= false;		// {bool}	Does the network have gradients-structure.
 	add		= new neural_builder(self); // For creating new layers for neural network.
 	
 	///________________________________________________________________________________________________________________

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Gradients",
-    "path": "folders/Neural Network/Gradients.yy",
+    "name": "Neural Network",
+    "path": "folders/Neural Network.yy",
   },
   "resourceVersion": "1.0",
-  "name": "neural_gradients",
+  "name": "neural_taped_network",
   "tags": [],
   "resourceType": "GMScript",
 }

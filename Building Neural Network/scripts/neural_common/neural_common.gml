@@ -1,7 +1,7 @@
 
 /*
 
-	Here is commonly used functions, which may not be needed for actual use etc.
+	Here is generally used functions, which may not be needed for actual use etc.
 
 */
 
@@ -20,5 +20,6 @@ function neuron_color(input) {
 /// @param	{function}	func
 /// @param	{real}		input
 function approximate_derivative(func, input) {
-	return (func(input-.00001) - func(input+.00001)) / .00002;
+	var epsilon = .00001;	// Some small number
+	return (func(input+epsilon) - func(input-epsilon)) / (epsilon+epsilon);
 }

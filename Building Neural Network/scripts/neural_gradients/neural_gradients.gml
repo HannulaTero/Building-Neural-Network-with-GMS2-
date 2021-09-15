@@ -1,86 +1,32 @@
+/*
+
+	TESTING
+	TO USE GRADIENT TAPES LIKE THESE ALLOWS OTHER GRADIENT DESCENT OPTIMIZERS
 
 
+/// @func	neural_gradient_tape(target);
+/// @desc	Creates struct for storing gradients tape for given array
+/// @param	{array}	target
+function neural_gradient_tape(_target) constructor {
+	target = _target;
+	size = array_length(_target);
+	tape = array_create(size, 0);
+	session = 0;
+	
+}
 
-/// @func	neural_gradients();
-/// @desc	Creates neural network, which contains gradients-structure for layers
-function neural_gradients() : neural_network() constructor {
-	taped = true;	// {bool}	Tells that network has gradients-structure.
-	error = 0;		// {real}	(for convenience)	Latest error from training
-	session = 0;	// {int}	(for convenience)	How many Backward-passes has been made
-	add.gradients = true;	// Builder will create layers which have gradients-structure and can do backpropagation.
-	
-	///________________________________________________________________________________________________________________
-	///
-	/// BACKWARD -PASS
-	///________________________________________________________________________________________________________________
-	/// @func	Cost(targets, CostFunction);
-	/// @desc	Calculates error for last layer/prediction by comparing to the given target values
-	/// @param	{array}		targets			Target Values for example
-	/// @param	{function}	CostFunction	A way of calculating error from target values
-	static Cost = function(targets, CostFunction) {
-		error = CostFunction(last.delta, last.output, targets);
-		return error;
-	}
-	
-	/// @func	Backward();
-	/// @desc	Backpropagates previously calculated error from last layer towards the first one.
-	static Backward = function() {
-		// Backpropagate through layers, start from the last layer.
-		for(var i = size-1; i > 0; i--) {	// We can skip input layer, as it doesn't have previous layer
-			layers[i].Backward();			// Backpropagate error through network-
-		}
-		
-		// For convenience keep count of backpropagations
-		session++;
-		
-		// Return input-layers delta/part for error just in case user wants to do something with it
-		return first.delta;
-	}
-	
+function neural_gradient_descent(target) : neural_gradient_tape(target) constructor {
 	/// @func	Apply(learnRate);
-	/// @desc	Uses average errors from several examples to update learnable parameters.
-	/// @param	{real}	learnRate	How large steps are taken. Too small makes learning slower, too large overshoots the local minima
+	/// @desc	Applies normal gradient descent to target array.
+	/// @param	{real}	learnRate
 	static Apply = function(learnRate) {
-		for(var i = 1; i < size; i++) {	// We can skip first/input layer 
-			if (layers[i].learnable) {	// We can skip non-learnable layers
-				layers[i].Apply(learnRate);
-			}
+		// Update parameter with gradients
+		for(var i = 0; i < size; i++) {
+			target[@i] += -learnRate * tape[i] / session;	
+			tape[@i] = 0;
 		}
-		// Restart the count
-		session = 0;
-	}
-	
-	
-	///________________________________________________________________________________________________________________
-	///
-	/// GENERAL FUNCTIONS
-	///________________________________________________________________________________________________________________
-	/// @func	Destroy();
-	/// @desc	Destroys all layers of the network.
-	static BaseDestroy = Destroy;
-	static Destroy = function() {
-		BaseDestroy();
-		error = 0;
+		
+		// Reset pass-count
 		session = 0;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

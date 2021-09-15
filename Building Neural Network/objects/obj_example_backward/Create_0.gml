@@ -1,18 +1,25 @@
-/// @desc Create network
-nn = new neural_gradients();	// Creates network with gradient-structure
+/// @desc CREATE NETWORK
+nn = new neural_taped_network();
 nn.add.Input(2);
-nn.add.Dense(10, ActFunc.TANH);
-nn.add.Dense(6, ActFunc.TANH);
+nn.add.Dense(12, ActFunc.TANH);
+nn.add.Dense(9, ActFunc.RELU);
+nn.add.Dense(6, ActFunc.SIGMOID);
 nn.add.Dense(1, ActFunc.TANH);
 
 // Generate examples on the fly
-input = [0,0];
+input = [0, 0];
 output = [0];
 function Example(xx, yy) {
-	input[0] = xx * 4 - 2;
-	input[1] = yy * 4 - 2;
-	// Output is Xor-function, range -1 to +1
-	output[0] = ((input[0] > 0) ^^ (input[1] > 0)) * 2 - 1;
+	// Normalize input values
+	xx = xx*2 / room_width - 1;
+	yy = yy*2 / room_height - 1;
+	
+	// Update input values
+	input[0] = xx;
+	input[1] = yy;
+	
+	// Generate output
+	output[0] = ((xx>0) ^^ (yy>0)) * 2 - 1;
 }
 
 // For drawing examples

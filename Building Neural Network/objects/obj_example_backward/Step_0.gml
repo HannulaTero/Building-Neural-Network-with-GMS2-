@@ -1,32 +1,33 @@
 /// @desc GRADIENT DESCENT
 training = false;
+var xx = random(room_width);
+var yy = random(room_height);
 
-// Make just prediction - don't learn
+// Make just a prediction - don't learn
 if (keyboard_check(ord("1"))) {
-	Example(mouse_x/room_width, mouse_y/room_height);
+	Example(mouse_x, mouse_y); // Normalize x/y
 	nn.Forward(input);
 }
 
-// Learn by single example
+// Learn from single example
 if (keyboard_check(ord("2"))) {
 	training = true;
-	Example(random(1), random(1));
-	nn.Forward(input);
-	nn.Cost(output, MeanSquaredError);
-	nn.Backward();
-	nn.Apply(.1);
+	Example(xx, yy);	// Generate random example
+	nn.Forward(input);	// Make prediction
+	nn.Cost(output);	// Evaluate performance, get error-signal
+	nn.Backward();		// Backpropagate signal
+	nn.Apply(.1);		// Update parameters -> Learn!
 }
 
 // Learn from several examples
 if (keyboard_check(ord("3"))) {
 	training = true;
-	Example(random(1), random(1));
-	nn.Forward(input);
-	nn.Cost(output, MeanSquaredError);
-	nn.Backward();
-	// Applies gradients after minibatch size of 25, can be defined to any size.
-	if (nn.session > 25) {
-		nn.Apply(.1);
+	Example(xx, yy);		// Generate random example
+	nn.Forward(input);		// Make prediction
+	nn.Cost(output);		// Evaluate performance, get error-signal
+	nn.Backward();			// Backpropagate signal
+	if (nn.session > 25) {	// Take average of 25 examples
+		nn.Apply(.1);		// Update parameters -> Learn!
 	}
 }
 
