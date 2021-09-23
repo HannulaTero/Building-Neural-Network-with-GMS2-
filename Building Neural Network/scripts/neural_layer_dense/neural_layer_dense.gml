@@ -41,7 +41,7 @@ function neural_layer_dense(_input, _size, _activation) : neural_layer_base(_siz
 			output[@i] = Activation( weightedSum + bias[i] );
 		}
 	}
-	
+
 	/// @func	Draw(x, y, scale, xspacing, yspacing);
 	/// @desc	Visualizes layers neuron activities and weights.
 	/// @param	{real}	x

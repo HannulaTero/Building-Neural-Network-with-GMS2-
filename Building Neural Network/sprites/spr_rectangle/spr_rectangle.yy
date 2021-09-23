@@ -73,8 +73,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Neural Network",
-    "path": "folders/Neural Network.yy",
+    "name": "Sprites",
+    "path": "folders/Neural Network/Sprites.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_rectangle",

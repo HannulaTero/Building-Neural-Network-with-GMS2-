@@ -15,7 +15,8 @@ enum ActFunc {
 	IDENTITY,	// Pass-through function
 	TANH,
 	SIGMOID,
-	RELU
+	RELU,
+	length
 }
 
 #macro	ACTIVATION_FUNC	global.gACTIVATION_FUNCTION_ARRAY

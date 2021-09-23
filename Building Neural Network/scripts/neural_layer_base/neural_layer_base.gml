@@ -20,6 +20,21 @@ function neural_layer_base(_size){
 	/// @desc	How neuron activities are updated
 	static Forward = function() {};
 	
+	/// @func	Copy(target);
+	/// @desc	Copies parameters from given layer. Expects same architecture.
+	/// @param	{layer}	target
+	static Copy = function() {};
+	
+	/// @func	CrossOver(...);
+	/// @desc	Copies parameters randomly from given layers. Expects same architecture.
+	static CrossOver = function() {};
+	
+	/// @func	Mutate(amount, rate);
+	/// @desc	Change parameters randomly
+	/// @param	{real}	amount
+	/// @param	{real}	rate
+	static Mutate = function(amount, rate) {};
+	
 	/// @func	Destroy();
 	/// @desc	Destroying the layer, if there are data-structures which needs to be deleted
 	static Destroy = function() {};
