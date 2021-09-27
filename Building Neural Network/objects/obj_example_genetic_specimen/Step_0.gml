@@ -1,17 +1,10 @@
 /// @desc DECISION-MAKING
-if (!alive) exit;
 
-var input = nn.first.output;
-var index = 0;
-// Input: Wall
-for(var i = 0; i < inputWall; i++) {
-	input[@index++] = Range(view[i], 256, obj_example_genetic_wall);
-}
-// Input: Floor
-input[@index++] = Range(270, 256, obj_example_genetic_floor);
+// INPUT - Cast ray
+nn.first.output[@0] = Ray(x, y, 0, 256, obj_example_genetic_wall);
 
-// THINK - make prediction what should be done
+// THINK - Make prediction what should be done
 nn.Forward();
 
-// Controlling
-button = (nn.last.output[0] > 0); // Ai "press" jump button
+// CONTROL - Press jump button
+button = (nn.last.output[0] > 0); // Threshold activation.

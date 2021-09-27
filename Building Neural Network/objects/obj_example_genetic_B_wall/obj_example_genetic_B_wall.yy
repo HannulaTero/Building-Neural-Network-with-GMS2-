@@ -27,11 +27,11 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Genetic Algorthim B",
-    "path": "folders/Example/Genetic Algorthim B.yy",
+    "name": "Genetic Algorithm B",
+    "path": "folders/Example/Genetic Algorithm B.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_example_b_genetic_wall",
+  "name": "obj_example_genetic_B_wall",
   "tags": [],
   "resourceType": "GMObject",
 }

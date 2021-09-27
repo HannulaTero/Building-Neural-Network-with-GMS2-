@@ -1,8 +1,5 @@
 /// @desc PLAY THE GAME
 
-x += hspd;
-y += vspd;
-
 var ss = 128;
 if (x < -ss)
 || (y < -ss)

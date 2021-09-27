@@ -1,8 +1,5 @@
 {
-  "spriteId": {
-    "name": "spr_example_wall",
-    "path": "sprites/spr_example_wall/spr_example_wall.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
@@ -27,11 +24,11 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Genetic Algorthim B",
-    "path": "folders/Example/Genetic Algorthim B.yy",
+    "name": "Genetic Algorithm B",
+    "path": "folders/Example/Genetic Algorithm B.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_example_b_genetic_floor",
+  "name": "obj_example_genetic_B_generator",
   "tags": [],
   "resourceType": "GMObject",
 }

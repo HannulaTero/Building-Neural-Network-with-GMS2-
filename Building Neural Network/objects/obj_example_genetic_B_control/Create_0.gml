@@ -6,12 +6,12 @@ time = 0;
 best = 0;
 
 // For convenience
-specimens = obj_example_genetic_specimen;
+specimens = obj_example_genetic_B_specimen;
 floors = obj_example_genetic_floor;
-walls = obj_example_genetic_wall;
+walls = obj_example_genetic_B_wall;
 
 // Create population
-count = 50;
+count = 100;
 population = array_create(count);
 var minPos = floors.bbox_left+8;
 var maxPos = floors.bbox_right-8;

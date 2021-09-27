@@ -1,13 +1,12 @@
 /// @desc PLAY THE GAME
-if (!alive) exit;
 
 // Touching floor
-ground = collision_point(x, y+10, obj_example_b_genetic_floor, false, true);
+var ground = collision_point(x, y, obj_example_genetic_floor, false, true);
 
 // Platforming
 if (ground != noone) {
-	y = ground.bbox_top;
-	vspd = button ? -12 : 0;
+	y = ground.bbox_top; // Don't sink into floor
+	vspd = button ? -12 : 0; // Jump
 }
 y += vspd;
 vspd += .6;
