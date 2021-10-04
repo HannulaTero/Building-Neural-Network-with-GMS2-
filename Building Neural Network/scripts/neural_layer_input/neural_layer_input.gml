@@ -3,7 +3,7 @@
 /// @param	{int}	size
 function neural_layer_input(_size) : neural_layer_base(_size) constructor {
 	static type = LayerType.INPUT;
-	
+		
 	/// @func	Forward(input);
 	/// @desc	Updates layer neurons activity by given array.
 	/// @param	{array}	input

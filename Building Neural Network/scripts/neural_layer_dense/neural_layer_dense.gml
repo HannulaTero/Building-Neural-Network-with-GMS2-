@@ -22,7 +22,7 @@ function neural_layer_dense(_input, _size, _activation) : neural_layer_base(_siz
 		for(var j = 0; j < input.size; j++) {
 			weights[@i][@j] = random_range(-.5, +.5);
 		}
-	}
+	}	
 	
 	/// @func	Forward();
 	/// @desc	Propagates signal forward. Calculates neuron activity as weighted sum and then applies activation function.
@@ -41,37 +41,7 @@ function neural_layer_dense(_input, _size, _activation) : neural_layer_base(_siz
 			output[@i] = Activation( weightedSum + bias[i] );
 		}
 	}
-
-	/// @func	Draw(x, y, scale, xspacing, yspacing);
-	/// @desc	Visualizes layers neuron activities and weights.
-	/// @param	{real}	x
-	/// @param	{real}	y
-	/// @param	{real}	scale
-	/// @param	{real}	xspacing
-	/// @param	{real}	yspacing
-	static BaseDraw = Draw;
-	static Draw = function(xx, yy, scale, xspacing, yspacing) {
-		// Draw weights
-		var ww = sprite_get_width(spr_neuron);
-		var xi = xx - ww*scale/2; 
-		var xj = xx + ww*scale/2 - xspacing;
-		var yi = yy - yspacing * size/2;
-		var yj = yy;
-		for(var i = 0; i < size; i++) {
-			yj = yy - yspacing * input.size/2;
-			for(var j = 0; j < input.size; j++) {
-				var value = weights[i][j];
-				var color = neuron_color(value);
-				var width = min(2, value*8);
-				draw_line_width_color(xi, yi, xj, yj, width, color, color);
-				yj += yspacing;
-			}
-			yi += yspacing;
-		}
-		
-		// Draw neuron activities
-		BaseDraw(xx, yy, scale, xspacing, yspacing);
-	}
+	
 }
 
 

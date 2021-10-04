@@ -11,13 +11,12 @@ floors = obj_example_genetic_floor;
 walls = obj_example_genetic_B_wall;
 
 // Create population
-count = 100;
+count = 50;
 population = array_create(count);
 var minPos = floors.bbox_left+8;
 var maxPos = floors.bbox_right-8;
 for(var i = 0; i < count; i++) {
 	var xx = random_range(minPos, maxPos);
-	population[@i] = instance_create_depth(xx, 0, -2, specimens);
+	population[@i] = instance_create_depth(xx, floors.bbox_top, -2, specimens);
 }
-
 

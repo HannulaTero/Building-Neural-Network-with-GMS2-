@@ -39,28 +39,17 @@ function neural_network() constructor {
 	///________________________________________________________________________________________________________________
 	///
 	/// GENERAL FUNCTIONS
-	///________________________________________________________________________________________________________________
+	///________________________________________________________________________________________________________________	
 	/// @func	Destroy();
-	/// @desc	Destroys all layers of the network.
+	/// @desc	Makes network empty hull. New layers layers can be added.
 	static Destroy = function() {
 		for(var i = 0; i < size; i++) {
 			layers[i].Destroy();
 		}
-	}
-	
-	/// @func	Draw(x, y, scale, xspacing, yspacing);
-	/// @desc	Visualizes network by drawing the layers. Makes x-origin at the middle of network.
-	/// @param	{real}	x
-	/// @param	{real}	y
-	/// @param	{real}	scale
-	/// @param	{real}	xspacing	
-	/// @param	{real}	yspacing	
-	static Draw = function(xx, yy, scale, xspacing, yspacing) {
-		xx -= xspacing * size / 2;
-		for(var i = 0; i < size; i++) {
-			layers[i].Draw(xx, yy, scale, xspacing, yspacing);
-			xx += xspacing;
-		}
+		layers = [];
+		size	= 0;
+		first	= undefined;	
+		last	= undefined;		
 	}
 }
 

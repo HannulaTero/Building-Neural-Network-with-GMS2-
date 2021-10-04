@@ -19,7 +19,7 @@ fitness = 0;	// for Genetic Algorithm
 // Restart for next round
 Restart = function() {
 	x		= xstart;
-	y		= 0;
+	y		= ystart;
 	vspd	= 0;
 	fitness = 0; 
 }
