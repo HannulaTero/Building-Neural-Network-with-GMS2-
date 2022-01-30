@@ -6,7 +6,7 @@
     "path": "folders/Neural Network/Model.yy",
   },
   "resourceVersion": "1.0",
-  "name": "neural_model_overseer",
+  "name": "neural_model_copy",
   "tags": [],
   "resourceType": "GMScript",
 }

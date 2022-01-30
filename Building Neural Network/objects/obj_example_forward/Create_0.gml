@@ -2,10 +2,9 @@
 
 // Create network base structure, then add layers
 nn = new neural_network();
-nn.add.Input(2);
-nn.add.Dense(8, ActFunc.TANH);
-nn.add.Dense(6, ActFunc.TANH);
-nn.add.Dense(2, ActFunc.TANH);
+nn.add.Input(1000);
+nn.add.Dense(1000, ActFunc.RELU);
+//nn.add.Dense(10, ActFunc.TANH);
 
 // You can make function or method for predefined network.
 // function Network() {

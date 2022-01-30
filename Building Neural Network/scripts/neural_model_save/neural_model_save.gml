@@ -1,56 +1,72 @@
 
-
-///	@func	neural_model_save(network, accuracy);
-/// @desc	Creates buffer from of network, which can be loaded later. Buffer needs to be explicitly destroyed.
-/// @desc	Can determine accuracy for layer parameters, which can greatly affect file-size with large networks.
-/// @param	{network}	network
-/// @param	{constant}	accuracy	Buffer constant: buffer_f64, _f32 or _f16.
-function neural_model_save(_network, _accuracy=buffer_f32) {
-	// CREATE BUFFER
-	var _sizeof = buffer_sizeof(_accuracy);
-	var _buffer = buffer_create(1024, buffer_grow, _sizeof);
-	
-	// HEADER : Information about reading the buffer. 
-	buffer_write(_buffer, buffer_f64, 0);				// Size of buffer. Updated later.
-	buffer_write(_buffer, buffer_f64, _network.size);	// Amount of layers
-	buffer_write(_buffer, buffer_f64, _accuracy);		// Accuracy for parameters
+/// @func	neural_model_save(network, accuracy);
+/// @desc	Saves network into a buffer.
+/// @desc	Buffer has 3 parts: accuracy, JSON, parameter-numbers
+/// @desc	Accuracy is stored as a first byte.
+/// @param	{struct}	network
+/// @param	{constant}	accuracy
+function neural_model_save(_target, _accuracy=buffer_f32) {
+	/// Prepare
+	var _size	= _target.size;
+	var _layers = _target.layers;
+	var _dummy	= array_create(_size);
+	var _buffer = buffer_create(1024, buffer_grow, 1);
 		
-	// LAYER INFORMATION
-	var _size = _network.size;
-	var _layers = _network.layers;
+	// Write JSON 
 	for(var i = 0; i < _size; i++) {
-		neural_model_layer_save(_layers[i], _buffer, _accuracy);
+		_dummy[i] = new neural_dummy_structure(_layers[i]);
+	}
+	var _struct = {};
+		_struct.layers = _dummy;
+		_struct.accuracy = _accuracy;
+	var _json = json_stringify(_struct);
+	buffer_write(_buffer, buffer_string, _json);
+	
+	// Write parameters
+	for(var i = 0; i < _size; i++) {
+		neural_write_parameters(_buffer, _layers[i], _accuracy);
 	}
 	
-	// TRIM BUFFER SIZE
-	var _bytes = buffer_tell(_buffer);
-	buffer_resize(_buffer, _bytes);
-	buffer_poke(_buffer, 0, buffer_f64, _bytes);
-	
-	// RETURN BUFFER
+	// Trim buffer and return result
+	buffer_resize(_buffer, buffer_tell(_buffer));
+	buffer_seek(_buffer, buffer_seek_start, 0);
 	return _buffer;
 }
 
-
-///	@func	neural_model_layer_save(layer, buffer, accuracy);
-/// @desc	Writes layer information into given buffer
-/// @param	{layer}		layer
-/// @param	{buffer}	buffer
-/// @param	{constant}	accuracy
-function neural_model_layer_save(_layer, _buffer, _accuracy) {
-	// GENERAL INFORMATION
-	buffer_write(_buffer, _accuracy, _layer.type);
-	buffer_write(_buffer, _accuracy, _layer.size);
-		
-	// TYPE SPECIFIC INFORMATION
+/// @func	neural_dummy_structure(target);
+/// @desc	Creates dummy-structure for stringifying to JSON.
+/// @param	{layer}	target
+function neural_dummy_structure(_layer) constructor {
+	/// GENERAL INFORMATION
+	type = _layer.type;
+	size = _layer.size;
+	
+	/// TYPE-SPECIFIC INFORMATION
 	switch(_layer.type) {
-			
-		// DENSE - activation, bias and weights
+		
+		// DENSE - Activation
 		case LayerType.DENSE:
-			// Activation
-			buffer_write(_buffer, _accuracy, _layer.activation);
+			activation = _layer.activation;
+			break;
+		
+		// DEFAULT - No other information
+		default: break;
+	}
+}
+
+
+/// @func	neural_write_parameters(buffer, layer, accuracy);
+/// @desc	Writes layer parameters into buffer.
+/// @param	{buffer}	buffer
+/// @param	{struct}	layer
+/// @param	{constant}	accuracy
+function neural_write_parameters(_buffer, _layer, _accuracy) {
+	switch(_layer.type) {
+		
+		// DENSE - Weights and biases
+		case LayerType.DENSE:
 			
-			// Bias
+			// Biases
 			var _size = _layer.size;
 			for(var i = 0; i < _size; i++) {
 				buffer_write(_buffer, _accuracy, _layer.bias[i]);
@@ -63,11 +79,29 @@ function neural_model_layer_save(_layer, _buffer, _accuracy) {
 				buffer_write(_buffer, _accuracy, _layer.weights[i][j]);
 			}}
 			break;
-			
-		// DEFAULT - No other needed parameters
-		default: break;
+		
+		// DEFAULT - No parameters.
+		default: break;		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,12 +1,12 @@
 /// @desc HOW-TO-USE: FORWARD-PASS
-
-var input = [];
-input[0] = mouse_x/room_width;
-input[1] = mouse_y/room_height;
-
-// Input can be set separately
-nn.Input(input);
-nn.Forward();
+//
+//var input = [];
+//input[0] = mouse_x/room_width;
+//input[1] = mouse_y/room_height;
+//
+//// Input can be set separately
+//nn.Input(input);
+//nn.Forward();
 
 // Or can be set at same time
 // nn.Forward(input);

@@ -1,33 +1,85 @@
-/// @desc LOAD / SAVE TEST
-if (keyboard_check_pressed(vk_numpad0)) {
-	var json = neural_model_stringify(population[0].nn);
+/// @desc SAVE / LOAD TEST
+if (!keyboard_check(vk_control)) exit; 
+
+// STRINGIFY to CLIPBOARD
+if (keyboard_check_pressed(ord("C"))) {
+	var specimen = population[0]; // Latest best
+	var json = neural_model_stringify(specimen.nn);
 	clipboard_set_text(json);
+	show_message("Stringified");
 }
 
-if (keyboard_check_pressed(vk_numpad1)) {
+// PARSE from CLIPBOARD
+if (keyboard_check_pressed(ord("V"))) {
 	var json = clipboard_get_text();
-	var nn = neural_model_parse(json);
-	for(var i = 0; i < count; i++) {
-		population[i].nn.Destroy();
-		population[i].nn = neural_model_clone(nn);
+	var network = neural_model_parse(json);
+	
+	// Check whether parsing failed
+	if (is_undefined(network)) {
+		show_message("Parsing failed :(");
+	}
+	
+	// Succeeded - copy parameters to whole population
+	if (!is_undefined(network)) {
+		for(var i = 0; i < count; i++) {
+			neural_model_copy(population[i].nn, network);
+		}
+		show_message("Parsing succeeded! Copied to population.");
 	}
 }
 
-if (keyboard_check_pressed(vk_numpad2)) {
-	var buffer = neural_model_save(population[0].nn);
+// SAVE NETWORK INTO FILE
+if (keyboard_check_pressed(ord("S"))) {
+	var specimen = population[0]; 
+	var buffer = neural_model_save(specimen.nn);
 	var file = get_save_filename("network|*.sav", "Specimen");
-	buffer_save(buffer, file);
+	if (file != "") {
+		buffer_save(buffer, file);
+		show_message("Network was saved!");
+	} else {
+		show_message("Saving was cancelled");
+	}
 	buffer_delete(buffer);
 }
 
-if (keyboard_check_pressed(vk_numpad3)) {
+// LOAD NETWORK FROM FILE
+if (keyboard_check_pressed(ord("O"))) {
+	// Try loading network
 	var file = get_open_filename("network|*.sav", "Specimen");
 	var buffer = buffer_load(file);
-	var nn = neural_model_load(buffer);
+	var network = neural_model_load(buffer);
 	buffer_delete(buffer);
-	for(var i = 0; i < count; i++) {
-		population[i].nn.Destroy();
-		population[i].nn = neural_model_clone(nn);
+	
+	// Check whether laoding failed
+	if (is_undefined(network)) {
+		show_message("Loading failed :'(");
+	}
+	
+	// Succeeded - copy parameters to whole population
+	if (!is_undefined(network)) {
+		for(var i = 0; i < count; i++) {
+			neural_model_copy(population[i].nn, network);
+		}
+		show_message("Loading was successful! Copied to population.");
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
